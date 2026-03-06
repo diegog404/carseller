@@ -1,4 +1,13 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using carseller1.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("carseller1Context")
+    ?? throw new InvalidOperationException("Connection string 'carseller1Context' not found.");
+
+builder.Services.AddDbContext<carseller1Context>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -1,12 +1,71 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\PEX4\\carseller1\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\PEX4\\carseller1\\carseller1\\Migrations\\20260306192841_Initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:carseller1\\Migrations\\20260306192841_Initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E987AD6F-36ED-098E-E805-100DA140CEB1}|carseller1\\carseller1.csproj|c:\\pex4\\carseller1\\carseller1\\data\\carseller1context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E987AD6F-36ED-098E-E805-100DA140CEB1}|carseller1\\carseller1.csproj|solutionrelative:carseller1\\data\\carseller1context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E987AD6F-36ED-098E-E805-100DA140CEB1}|carseller1\\carseller1.csproj|c:\\pex4\\carseller1\\carseller1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E987AD6F-36ED-098E-E805-100DA140CEB1}|carseller1\\carseller1.csproj|solutionrelative:carseller1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20260306192841_Initial.cs",
+              "DocumentMoniker": "C:\\PEX4\\carseller1\\carseller1\\Migrations\\20260306192841_Initial.cs",
+              "RelativeDocumentMoniker": "carseller1\\Migrations\\20260306192841_Initial.cs",
+              "ToolTip": "C:\\PEX4\\carseller1\\carseller1\\Migrations\\20260306192841_Initial.cs",
+              "RelativeToolTip": "carseller1\\Migrations\\20260306192841_Initial.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-06T19:28:41.919Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "carseller1Context.cs",
+              "DocumentMoniker": "C:\\PEX4\\carseller1\\carseller1\\Data\\carseller1Context.cs",
+              "RelativeDocumentMoniker": "carseller1\\Data\\carseller1Context.cs",
+              "ToolTip": "C:\\PEX4\\carseller1\\carseller1\\Data\\carseller1Context.cs",
+              "RelativeToolTip": "carseller1\\Data\\carseller1Context.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-06T19:20:06.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\PEX4\\carseller1\\carseller1\\Program.cs",
+              "RelativeDocumentMoniker": "carseller1\\Program.cs",
+              "ToolTip": "C:\\PEX4\\carseller1\\carseller1\\Program.cs",
+              "RelativeToolTip": "carseller1\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-06T19:17:52.649Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
