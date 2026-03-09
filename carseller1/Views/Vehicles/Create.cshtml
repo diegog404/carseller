@@ -1,0 +1,62 @@
+﻿@model carseller1.Models.Vehicle
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h2>Create Vehicle</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+
+
+        <form asp-action="Create">
+            <div class="form-group">
+
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Type" class="control-label"></label>
+                <input asp-for="Type" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="LicensePlate" class="control-label"></label>
+                <input asp-for="LicensePlate" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Year" class="control-label"></label>
+                <input asp-for="Year" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Company" class="control-label"></label>
+                <input asp-for="Company" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Sale" class="control-label"></label>
+                <input asp-for="Sale" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
