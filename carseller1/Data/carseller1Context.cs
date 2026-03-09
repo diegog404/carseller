@@ -14,6 +14,10 @@ namespace carseller1.Data
         {
         }
 
-        public DbSet<carseller1.Models.Client> Client { get; set; } = default!;
+        public DbSet<Client> Client { get; set; }
+        public DbSet<Company> Company{ get; set; }
+        public DbSet<Sale> Sale{ get; set; }
+        public DbSet<User> User{ get; set; }
+        public DbSet<Vehicle> Vehicle{ get; set; }
     }
 }

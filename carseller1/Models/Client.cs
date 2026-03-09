@@ -4,13 +4,9 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
         public int PhoneNumber { get; set; }
-
         public string State { get; set; }
-
         public string Obervation { get; set; }
-
         public ICollection<Sale> Sales { get; set; } = new List<Sale>();
 
         
