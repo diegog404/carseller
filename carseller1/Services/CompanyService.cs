@@ -14,7 +14,7 @@ namespace carseller1.Services
 
         public List<Company> FindAll()
         {
-            return _context.Company.ToList();
+            return _context.Company.OrderBy(x => x.Name).ToList();
         }
 
         public void Insert(Company obj)

@@ -12,7 +12,9 @@ namespace carseller1.Models
         public int Year{ get; set; }
         public double Price{ get; set; }
         public Company Company{ get; set; }
+        public int CompanyId{ get; set; }
         public Sale Sale{ get; set; }
+        public int? SaleId{ get; set; }
 
         public Vehicle()
         {

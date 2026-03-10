@@ -19,6 +19,8 @@ namespace carseller1.Services
 
         public void Insert(Sale obj)
         {
+
+            obj.Client = _context.Client.First();
             _context.Add(obj);
             _context.SaveChanges();
         }

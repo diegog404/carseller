@@ -1,4 +1,4 @@
-﻿@model carseller1.Models.Sale
+﻿@model carseller1.Models.ViewModels.SaleFormViewModel
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -14,34 +14,45 @@
         <form asp-action="Create">
             <div class="form-group">
 
-                <label asp-for="SaleValue" class="control-label"></label>
-                <input asp-for="SaleValue" class="form-control" />
+                <label asp-for="Sale.SaleValue" class="control-label"></label>
+                <input asp-for="Sale.SaleValue" class="form-control" />
             </div>
             <div class="form-group">
 
-                <label asp-for="SaleComission" class="control-label"></label>
-                <input asp-for="SaleComission" class="form-control" />
+                <label asp-for="Sale.SaleComission" class="control-label"></label>
+                <input asp-for="Sale.SaleComission" class="form-control" />
             </div>
             <div class="form-group">
 
-                <label asp-for="SaleDate" class="control-label"></label>
-                <input asp-for="SaleDate" class="form-control" />
+                <label asp-for="Sale.SaleDate" class="control-label"></label>
+                <input asp-for="Sale.SaleDate" class="form-control" />
             </div>
             <div class="form-group">
 
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
+                <label asp-for="Sale.Status" class="control-label"></label>
+                <input asp-for="Sale.Status" class="form-control" />
             </div>
             <div class="form-group">
 
-                <label asp-for="Client" class="control-label"></label>
-                <input asp-for="Client" class="form-control" />
+                <label asp-for="Sale.Client" class="control-label"></label>
+                <input asp-for="Sale.Client" class="form-control" />
             </div>
             <div class="form-group">
 
-                <label asp-for="User" class="control-label"></label>
-                <input asp-for="User" class="form-control" />
+                <label asp-for="Sale.User" class="control-label"></label>
+                <input asp-for="Sale.User" class="form-control" />
             </div>
+
+            <div class="form-group">
+                <label asp-for="Sale.ClientId" class="control-label"></label>
+                <select asp-for="Sale.ClientId" asp-items="@(new SelectList(Model.Clients, "Id", "Name"))" class="form-control"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Sale.UserId" class="control-label"></label>
+                <select asp-for="Sale.UserId" asp-items="@(new SelectList(Model.Users, "Id", "Name"))" class="form-control"></select>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

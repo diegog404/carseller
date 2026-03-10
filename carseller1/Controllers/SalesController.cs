@@ -1,4 +1,5 @@
 ﻿using carseller1.Models;
+using carseller1.Models.ViewModels;
 using carseller1.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,10 +8,14 @@ namespace carseller1.Controllers
     public class SalesController : Controller
     {
         private readonly SaleService _saleService;
+        private readonly ClientService _clientService;
+        private readonly UserService _userService;
 
-        public SalesController(SaleService saleService)
+        public SalesController(SaleService saleService, ClientService clientService, UserService userService)
         {
             _saleService = saleService;
+            _clientService = clientService;
+            _userService = userService;
         }
 
         public IActionResult Index()
@@ -21,7 +26,10 @@ namespace carseller1.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var clients = _clientService.FindAll();
+            var users = _userService.FindAll();
+            var viewModel = new SaleFormViewModel { Clients = clients, Users = users };
+            return View(viewModel);
         }
 
         [HttpPost]

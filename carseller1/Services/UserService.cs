@@ -3,21 +3,21 @@ using carseller1.Models;
 
 namespace carseller1.Services
 {
-    public class VehicleService
+    public class UserService
     {
         private readonly carseller1Context _context;
 
-        public VehicleService(carseller1Context context)
+        public UserService(carseller1Context context)
         {
             _context = context;
         }
 
-        public List<Vehicle> FindAll()
+        public List<User> FindAll()
         {
-            return _context.Vehicle.OrderBy(x => x.Id).ToList();
+            return _context.User.OrderBy(x => x.Name).ToList();
         }
 
-        public void Insert(Vehicle obj)
+        public void Insert(User obj)
         {
             _context.Add(obj);
             _context.SaveChanges();

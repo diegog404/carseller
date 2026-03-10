@@ -13,6 +13,8 @@ builder.Services.AddDbContext<carseller1Context>(options =>
 builder.Services.AddScoped<VehicleService>();
 builder.Services.AddScoped<CompanyService>();
 builder.Services.AddScoped<SaleService>();
+builder.Services.AddScoped<ClientService>();
+builder.Services.AddScoped<UserService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
