@@ -1,0 +1,50 @@
+﻿@model carseller1.Models.Sale
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h4>Sale</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+
+        <form asp-action="Create">
+            <div class="form-group">
+
+                <label asp-for="SaleValue" class="control-label"></label>
+                <input asp-for="SaleValue" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="SaleComission" class="control-label"></label>
+                <input asp-for="SaleComission" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="SaleDate" class="control-label"></label>
+                <input asp-for="SaleDate" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Client" class="control-label"></label>
+                <input asp-for="Client" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="User" class="control-label"></label>
+                <input asp-for="User" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
