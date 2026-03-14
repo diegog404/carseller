@@ -36,5 +36,29 @@ namespace carseller1.Controllers
             _vehicleService.Insert(vehicle);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _vehicleService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _vehicleService.Remove(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

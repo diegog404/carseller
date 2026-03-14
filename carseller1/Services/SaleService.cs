@@ -1,5 +1,6 @@
 ﻿using carseller1.Data;
 using carseller1.Models;
+using NuGet.Protocol.Plugins;
 
 namespace carseller1.Services
 {
@@ -22,6 +23,18 @@ namespace carseller1.Services
 
             obj.Client = _context.Client.First();
             _context.Add(obj);
+            _context.SaveChanges();
+        }
+
+        public Sale FindById(int id)
+        {
+            return _context.Sale.FirstOrDefault(obj => obj.Id == id);
+        }
+
+        public void Remove(int id)
+        {
+            var obj = _context.Sale.Find(id);
+            _context.Sale.Remove(obj);
             _context.SaveChanges();
         }
     }

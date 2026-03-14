@@ -16,5 +16,17 @@ namespace carseller1.Services
         {
             return _context.Client.OrderBy(x => x.Name).ToList();
         }
+
+        public Client FindById(int id)
+        {
+            return _context.Client.FirstOrDefault(obj => obj.Id == id);
+        }
+
+        public void Remove(int id)
+        {
+            var obj = _context.Client.Find(id);
+            _context.Client.Remove(obj);
+            _context.SaveChanges();
+        }
     }
 }
