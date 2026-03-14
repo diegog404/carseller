@@ -55,5 +55,23 @@ namespace carseller1.Controllers
             _companyService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Details(int? id)
+        {
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var obj = _companyService.FindById(id.Value);
+                if (obj == null)
+                {
+                    return NotFound();
+                }
+
+                return View(obj);
+            }
+        }
     }
 }

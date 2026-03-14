@@ -1,5 +1,6 @@
 ﻿using carseller1.Data;
 using carseller1.Models;
+using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
 
 namespace carseller1.Services
@@ -28,7 +29,7 @@ namespace carseller1.Services
 
         public Sale FindById(int id)
         {
-            return _context.Sale.FirstOrDefault(obj => obj.Id == id);
+            return _context.Sale.Include(obj => obj.User).Include(obj => obj.Client).FirstOrDefault(obj => obj.Id == id);
         }
 
         public void Remove(int id)
