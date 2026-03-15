@@ -1,6 +1,7 @@
 ﻿using carseller1.Models;
 using carseller1.Models.ViewModels;
 using carseller1.Services;
+using carseller1.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace carseller1.Controllers
@@ -78,6 +79,50 @@ namespace carseller1.Controllers
             }
 
             return View(obj);
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _saleService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            List<Client> clients = _clientService.FindAll();
+            List<User> users = _userService.FindAll();
+
+            SaleFormViewModel viewModel = new SaleFormViewModel { Sale = obj, Clients = clients, Users = users };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Sale sale)
+        {
+            if (id != sale.Id)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                _saleService.Update(sale);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }

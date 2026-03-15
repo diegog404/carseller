@@ -1,0 +1,69 @@
+﻿@model carseller1.Models.ViewModels.VehicleFormViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h2>Edit Vehicle</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+
+
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Vehicle.Id" />
+            <div class="form-group">
+
+                <label asp-for="Vehicle.Status" class="control-label"></label>
+                <input asp-for="Vehicle.Status" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Vehicle.Type" class="control-label"></label>
+                <input asp-for="Vehicle.Type" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Vehicle.LicensePlate" class="control-label"></label>
+                <input asp-for="Vehicle.LicensePlate" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Vehicle.Model" class="control-label"></label>
+                <input asp-for="Vehicle.Model" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Vehicle.Year" class="control-label"></label>
+                <input asp-for="Vehicle.Year" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Vehicle.Price" class="control-label"></label>
+                <input asp-for="Vehicle.Price" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Vehicle.Company" class="control-label"></label>
+                <input asp-for="Vehicle.Company" class="form-control" />
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Vehicle.Sale" class="control-label"></label>
+                <input asp-for="Vehicle.Sale" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Vehicle.CompanyId" class="control-label"></label>
+                <select asp-for="Vehicle.CompanyId" asp-items="@(new SelectList(Model.Companies, "Id", "Name"))" class="form-control"></select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 ﻿using carseller1.Data;
 using carseller1.Models;
+using carseller1.Services.Exceptions;
 
 namespace carseller1.Services
 {
@@ -33,6 +34,24 @@ namespace carseller1.Services
             var obj = _context.Company.Find(id);
             _context.Company.Remove(obj);
             _context.SaveChanges();
+        }
+
+        public void Update(Company obj)
+        {
+            if(!_context.Company.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id not found");
+            }
+
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch(DbConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }

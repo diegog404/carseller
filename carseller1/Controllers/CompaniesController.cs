@@ -1,6 +1,8 @@
 ﻿using carseller1.Models;
 using carseller1.Services;
+using carseller1.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 
 namespace carseller1.Controllers
 {
@@ -34,13 +36,13 @@ namespace carseller1.Controllers
 
         public IActionResult Delete(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             var obj = _companyService.FindById(id.Value);
-            if(obj == null)
+            if (obj == null)
             {
                 return NotFound();
             }
@@ -71,6 +73,46 @@ namespace carseller1.Controllers
                 }
 
                 return View(obj);
+            }
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _companyService.FindById(id.Value);
+            if(obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Company company)
+        {
+            if(id != company.Id)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                _companyService.Update(company);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
             }
         }
     }

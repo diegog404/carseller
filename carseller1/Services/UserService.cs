@@ -1,5 +1,6 @@
 ﻿using carseller1.Data;
 using carseller1.Models;
+using carseller1.Services.Exceptions;
 using NuGet.Protocol.Plugins;
 
 namespace carseller1.Services
@@ -34,6 +35,23 @@ namespace carseller1.Services
             var obj = _context.User.Find(id);
             _context.User.Remove(obj);
             _context.SaveChanges();
+        }
+
+        public void Update(User obj)
+        {
+            if (!_context.User.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id not found");
+            }
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch (DbConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }
