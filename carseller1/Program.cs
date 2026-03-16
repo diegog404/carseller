@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using carseller1.Data;
 using carseller1.Services;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("carseller1Context")
@@ -20,6 +22,16 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+var enUs = new CultureInfo("en-US");
+var localizationOption = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(enUs),
+    SupportedCultures = new List<CultureInfo> { enUs },
+    SupportedUICultures = new List<CultureInfo> { enUs }
+};
+app.UseRequestLocalization(localizationOption);
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

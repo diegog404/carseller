@@ -1,4 +1,5 @@
 ﻿using carseller1.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace carseller1.Models
 {
@@ -10,6 +11,8 @@ namespace carseller1.Models
         public string LicensePlate{ get; set; }
         public string Model{ get; set; }
         public int Year{ get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double Price{ get; set; }
         public Company Company{ get; set; }
         public int CompanyId{ get; set; }

@@ -1,9 +1,12 @@
-﻿namespace carseller1.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace carseller1.Models
 {
     public class Client
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [DataType(DataType.PhoneNumber)]
         public int PhoneNumber { get; set; }
         public string State { get; set; }
         public string Obervation { get; set; }

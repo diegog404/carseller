@@ -1,12 +1,22 @@
 ﻿using carseller1.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace carseller1.Models
 {
     public class Sale
     {
         public int Id{ get; set; }
+        [Display(Name = "Sale Value")]
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double SaleValue{ get; set; }
+
+        [Display(Name = "Sale Comission")]
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double SaleComission{ get; set; }
+
+        [Display(Name = "Sale Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime SaleDate{ get; set; }
         public SaleStatus Status{ get; set; }
         public Client Client{ get; set; }
