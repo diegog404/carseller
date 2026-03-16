@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using carseller1.Data;
+using carseller1.Models;
+using carseller1.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using carseller1.Data;
-using carseller1.Models;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace carseller1.Controllers
 {
@@ -30,14 +32,14 @@ namespace carseller1.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided." });
             }
 
             var client = await _context.Client
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (client == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not found."});
             }
 
             return View(client);
@@ -70,13 +72,13 @@ namespace carseller1.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided." });
             }
 
             var client = await _context.Client.FindAsync(id);
             if (client == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not found." });
             }
             return View(client);
         }
@@ -90,7 +92,7 @@ namespace carseller1.Controllers
         {
             if (id != client.Id)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id mismatch." });
             }
 
             if (ModelState.IsValid)
@@ -100,11 +102,11 @@ namespace carseller1.Controllers
                     _context.Update(client);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException e)
                 {
                     if (!ClientExists(client.Id))
                     {
-                        return NotFound();
+                        return RedirectToAction(nameof(Error), new { message = e.Message });
                     }
                     else
                     {
@@ -121,14 +123,14 @@ namespace carseller1.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided." });
             }
 
             var client = await _context.Client
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (client == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not found." });
             }
 
             return View(client);
@@ -152,6 +154,16 @@ namespace carseller1.Controllers
         private bool ClientExists(int id)
         {
             return _context.Client.Any(e => e.Id == id);
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }
