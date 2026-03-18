@@ -6,13 +6,21 @@ namespace carseller1.Models
     public class User
     {
         public int Id { get; set; }
+
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "{0} size should be between {2} and {1}")]
+        [Required(ErrorMessage = "{0} required")]
         public string Name { get; set; }
+
+        [EmailAddress(ErrorMessage = "Enter a valid email")]
+        [Required(ErrorMessage = "{0} required")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]
         [DataType(DataType.Password)]
         public string PasswordHash { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]
         [Display(Name = "Creation Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]

@@ -4,6 +4,7 @@ using carseller1.Services;
 using carseller1.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace carseller1.Controllers
 {
@@ -31,6 +32,11 @@ namespace carseller1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(User user)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
             _userService.Insert(user);
             return RedirectToAction(nameof(Index));
         }
@@ -95,6 +101,11 @@ namespace carseller1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, User user)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
             if (id != user.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch." });

@@ -35,6 +35,13 @@ namespace carseller1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Vehicle vehicle)
         {
+            if (!ModelState.IsValid)
+            {
+                var companies = _companyService.FindAll();
+                var viewModel = new VehicleFormViewModel { Vehicle = vehicle, Companies = companies };
+                return View(viewModel);
+            }
+
             _vehicleService.Insert(vehicle);
             return RedirectToAction(nameof(Index));
         }
@@ -102,6 +109,13 @@ namespace carseller1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Vehicle vehicle)
         {
+            if (!ModelState.IsValid)
+            {
+                var companies = _companyService.FindAll();
+                var viewModel = new VehicleFormViewModel { Vehicle = vehicle, Companies = companies };
+                return View(viewModel);
+            }
+
             if (id != vehicle.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch" });

@@ -32,6 +32,11 @@ namespace carseller1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Company company)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(company);
+            }
+
             _companyService.Insert(company);
             return RedirectToAction(nameof(Index));
         }
@@ -98,7 +103,12 @@ namespace carseller1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Company company)
         {
-            if(id != company.Id)
+            if (!ModelState.IsValid)
+            {
+                return View(company);
+            }
+
+            if (id != company.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
             }

@@ -38,6 +38,14 @@ namespace carseller1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Sale sale)
         {
+            if (!ModelState.IsValid)
+            {
+                var clients = _clientService.FindAll();
+                var users = _userService.FindAll();
+                var viewModel = new SaleFormViewModel { Clients = clients, Users = users };
+                return View(viewModel);
+            }
+
             _saleService.Insert(sale);
             return RedirectToAction(nameof(Index));
         }
@@ -106,6 +114,14 @@ namespace carseller1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Sale sale)
         {
+            if (!ModelState.IsValid)
+            {
+                var clients = _clientService.FindAll();
+                var users = _userService.FindAll();
+                var viewModel = new SaleFormViewModel { Clients = clients, Users = users };
+                return View(viewModel);
+            }
+
             if (id != sale.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch." });
