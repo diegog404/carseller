@@ -15,34 +15,36 @@ namespace carseller1.Services
             _context = context;
         }
 
-        public List<Sale> FindAll()
+        public async Task<List<Sale>> FindAllAsync()
         {
-            return _context.Sale.ToList();
+            return await _context.Sale.ToListAsync();
         }
 
-        public void Insert(Sale obj)
+        public async Task InsertAsync(Sale obj)
         {
 
-            obj.Client = _context.Client.First();
+            obj.Client = await _context.Client.FirstAsync();
             _context.Add(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Sale FindById(int id)
+        public async Task<Sale> FindByIdAsync(int id)
         {
-            return _context.Sale.Include(obj => obj.User).Include(obj => obj.Client).FirstOrDefault(obj => obj.Id == id);
+            return await _context.Sale.Include(obj => obj.User).Include(obj => obj.Client).FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Sale.Find(id);
+            var obj = await _context.Sale.FindAsync(id);
             _context.Sale.Remove(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Sale obj)
+        public async Task UpdateAsync(Sale obj)
         {
-            if (!_context.Sale.Any(x => x.Id == obj.Id))
+            bool hasAny = await _context.Sale.AnyAsync(x => x.Id == obj.Id);
+
+            if (!hasAny)
             {
                 throw new NotFoundException("Id not found");
             }
@@ -50,7 +52,7 @@ namespace carseller1.Services
             try
             {
                 _context.Update(obj);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbConcurrencyException e)
             {

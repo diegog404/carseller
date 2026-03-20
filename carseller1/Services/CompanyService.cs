@@ -1,6 +1,7 @@
 ﻿using carseller1.Data;
 using carseller1.Models;
 using carseller1.Services.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace carseller1.Services
 {
@@ -13,32 +14,34 @@ namespace carseller1.Services
             _context = context;
         }
 
-        public List<Company> FindAll()
+        public async Task<List<Company>> FindAllAsync()
         {
-            return _context.Company.OrderBy(x => x.Name).ToList();
+            return await _context.Company.OrderBy(x => x.Name).ToListAsync();
         }
 
-        public void Insert(Company obj)
+        public async Task InsertAsync(Company obj)
         {
             _context.Add(obj);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
 
-        public Company FindById(int id)
+        public async Task<Company> FindByIdAsync(int id)
         {
-            return _context.Company.FirstOrDefault(obj => obj.Id == id);
+            return await _context.Company.FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Company.Find(id);
+            var obj = await _context.Company.FindAsync(id);
             _context.Company.Remove(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Company obj)
+        public async Task UpdateAsync(Company obj)
         {
-            if(!_context.Company.Any(x => x.Id == obj.Id))
+            bool hasAny = await _context.Company.AnyAsync(x => x.Id == obj.Id);
+
+            if (!hasAny)
             {
                 throw new NotFoundException("Id not found");
             }
@@ -46,7 +49,7 @@ namespace carseller1.Services
             try
             {
                 _context.Update(obj);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
             }
             catch(DbConcurrencyException e)
             {

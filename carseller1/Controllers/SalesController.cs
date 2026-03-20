@@ -20,44 +20,44 @@ namespace carseller1.Controllers
             _userService = userService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _saleService.FindAll();
+            var list = await _saleService.FindAllAsync();
             return View(list);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var clients = _clientService.FindAll();
-            var users = _userService.FindAll();
+            var clients = await _clientService.FindAllAsync();
+            var users = await _userService.FindAllAsync();
             var viewModel = new SaleFormViewModel { Clients = clients, Users = users };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Sale sale)
+        public async Task<IActionResult> Create(Sale sale)
         {
             if (!ModelState.IsValid)
             {
-                var clients = _clientService.FindAll();
-                var users = _userService.FindAll();
+                var clients = await _clientService.FindAllAsync();
+                var users = await _userService.FindAllAsync();
                 var viewModel = new SaleFormViewModel { Clients = clients, Users = users };
                 return View(viewModel);
             }
 
-            _saleService.Insert(sale);
+            await _saleService.InsertAsync(sale);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided." });
             }
 
-            var obj = _saleService.FindById(id.Value);
+            var obj = await _saleService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found." });
@@ -68,20 +68,20 @@ namespace carseller1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _saleService.Remove(id);
+            await _saleService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided." });
             }
 
-            var obj = _saleService.FindById(id.Value);
+            var obj = await _saleService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found."});
@@ -90,21 +90,21 @@ namespace carseller1.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided." });
             }
 
-            var obj = _saleService.FindById(id.Value);
+            var obj = await _saleService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found." });
             }
 
-            List<Client> clients = _clientService.FindAll();
-            List<User> users = _userService.FindAll();
+            List<Client> clients = await _clientService.FindAllAsync();
+            List<User> users = await _userService.FindAllAsync();
 
             SaleFormViewModel viewModel = new SaleFormViewModel { Sale = obj, Clients = clients, Users = users };
             return View(viewModel);
@@ -112,12 +112,12 @@ namespace carseller1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Sale sale)
+        public async Task<IActionResult> Edit(int id, Sale sale)
         {
             if (!ModelState.IsValid)
             {
-                var clients = _clientService.FindAll();
-                var users = _userService.FindAll();
+                var clients = await _clientService.FindAllAsync();
+                var users = await _userService.FindAllAsync();
                 var viewModel = new SaleFormViewModel { Clients = clients, Users = users };
                 return View(viewModel);
             }
@@ -129,7 +129,7 @@ namespace carseller1.Controllers
 
             try
             {
-                _saleService.Update(sale);
+                await _saleService.UpdateAsync(sale);
                 return RedirectToAction(nameof(Index));
             }
             catch (NotFoundException e)

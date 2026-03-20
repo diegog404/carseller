@@ -1,5 +1,6 @@
 ﻿using carseller1.Data;
 using carseller1.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace carseller1.Services
 {
@@ -12,21 +13,21 @@ namespace carseller1.Services
             _context = context;
         }
 
-        public List<Client> FindAll()
+        public async Task<List<Client>> FindAllAsync()
         {
-            return _context.Client.OrderBy(x => x.Name).ToList();
+            return await _context.Client.OrderBy(x => x.Name).ToListAsync();
         }
 
-        public Client FindById(int id)
+        public async Task<Client> FindByIdAsync(int id)
         {
-            return _context.Client.FirstOrDefault(obj => obj.Id == id);
+            return await _context.Client.FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Client.Find(id);
+            var obj = await _context.Client.FindAsync(id);
             _context.Client.Remove(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

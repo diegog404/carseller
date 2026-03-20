@@ -18,42 +18,42 @@ namespace carseller1.Controllers
             _companyService = companyService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _vehicleService.FindAll();
+            var list = await _vehicleService.FindAllAsync();
             return View(list);
         }
 
-        public IActionResult Create()
+        public async Task <IActionResult> Create()
         {
-            var companies = _companyService.FindAll();
+            var companies = await _companyService.FindAllAsync();
             var viewModel = new VehicleFormViewModel { Companies = companies };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Vehicle vehicle)
+        public async Task<IActionResult> Create(Vehicle vehicle)
         {
             if (!ModelState.IsValid)
             {
-                var companies = _companyService.FindAll();
+                var companies = await _companyService.FindAllAsync();
                 var viewModel = new VehicleFormViewModel { Vehicle = vehicle, Companies = companies };
                 return View(viewModel);
             }
 
-            _vehicleService.Insert(vehicle);
+            await _vehicleService.InsertAsync(vehicle);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task <IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided." });
             }
 
-            var obj = _vehicleService.FindById(id.Value);
+            var obj = await _vehicleService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found." });
@@ -64,20 +64,20 @@ namespace carseller1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _vehicleService.Remove(id);
+            await _vehicleService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided." });
             }
 
-            var obj = _vehicleService.FindById(id.Value);
+            var obj = await _vehicleService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found." });
@@ -86,20 +86,20 @@ namespace carseller1.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided." });
             }
 
-            var obj = _vehicleService.FindById(id.Value);
+            var obj = await _vehicleService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
 
-            List<Company> companies = _companyService.FindAll();
+            List<Company> companies = await _companyService.FindAllAsync();
 
             VehicleFormViewModel viewModel = new VehicleFormViewModel { Vehicle = obj, Companies = companies };
             return View(viewModel);
@@ -107,11 +107,11 @@ namespace carseller1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Vehicle vehicle)
+        public async Task<IActionResult> Edit(int id, Vehicle vehicle)
         {
             if (!ModelState.IsValid)
             {
-                var companies = _companyService.FindAll();
+                var companies = await _companyService.FindAllAsync();
                 var viewModel = new VehicleFormViewModel { Vehicle = vehicle, Companies = companies };
                 return View(viewModel);
             }
@@ -123,7 +123,7 @@ namespace carseller1.Controllers
 
             try
             {
-                _vehicleService.Update(vehicle);
+                await _vehicleService.UpdateAsync(vehicle);
                 return RedirectToAction(nameof(Index));
             }
             catch (NotFoundException e)

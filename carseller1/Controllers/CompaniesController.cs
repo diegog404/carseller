@@ -17,38 +17,38 @@ namespace carseller1.Controllers
             _companyService = companyService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _companyService.FindAll();
+            var list = await _companyService.FindAllAsync();
             return View(list);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Company company)
+        public async Task<IActionResult> Create(Company company)
         {
             if (!ModelState.IsValid)
             {
                 return View(company);
             }
 
-            _companyService.Insert(company);
+            await _companyService.InsertAsync(company);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided." });
             }
 
-            var obj = _companyService.FindById(id.Value);
+            var obj = await _companyService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found." });
@@ -59,13 +59,13 @@ namespace carseller1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _companyService.Remove(id);
+            await _companyService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             {
                 if (id == null)
@@ -73,7 +73,7 @@ namespace carseller1.Controllers
                     return RedirectToAction(nameof(Error), new { message = "Id not provided." });
                 }
 
-                var obj = _companyService.FindById(id.Value);
+                var obj = await _companyService.FindByIdAsync(id.Value);
                 if (obj == null)
                 {
                     return RedirectToAction(nameof(Error), new { message = "Id not found." });
@@ -83,14 +83,14 @@ namespace carseller1.Controllers
             }
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if(id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided." });
             }
 
-            var obj = _companyService.FindById(id.Value);
+            var obj = await _companyService.FindByIdAsync(id.Value);
             if(obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found."});
@@ -101,7 +101,7 @@ namespace carseller1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Company company)
+        public async Task<IActionResult> Edit(int id, Company company)
         {
             if (!ModelState.IsValid)
             {
@@ -115,7 +115,7 @@ namespace carseller1.Controllers
 
             try
             {
-                _companyService.Update(company);
+                await _companyService.UpdateAsync(company);
                 return RedirectToAction(nameof(Index));
             }
             catch (NotFoundException e)
