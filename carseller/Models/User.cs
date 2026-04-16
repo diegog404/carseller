@@ -35,7 +35,7 @@
 
         public double TotalSales(DateTime initial, DateTime final)
         {
-            return Sales.Where(sa => sa.SaleDate >= initial && sa.SaleDate <= final).Sum(sa => sa.SaleValue);
+            return Sales.Where(sa => sa.Date >= initial && sa.Date <= final).Sum(sa => sa.Value);
         }
     }
 }
