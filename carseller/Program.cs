@@ -12,6 +12,8 @@ builder.Services.AddDbContext<carsellerContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ClientService>();
+builder.Services.AddScoped<CompanyService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
