@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using carseller.Data;
+using carseller.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -9,6 +10,8 @@ var connectionString = builder.Configuration.GetConnectionString("carsellerConte
 
 builder.Services.AddDbContext<carsellerContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+builder.Services.AddScoped<UserService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
