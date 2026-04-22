@@ -14,6 +14,8 @@ builder.Services.AddDbContext<carsellerContext>(options =>
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ClientService>();
 builder.Services.AddScoped<CompanyService>();
+builder.Services.AddScoped<VehicleService>();
+builder.Services.AddScoped<SaleService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

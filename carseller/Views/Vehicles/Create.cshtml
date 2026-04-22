@@ -1,0 +1,80 @@
+﻿@model carseller.Models.ViewModels.VehicleFormViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h2>Create</h2>
+<h4>Vehicle</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+
+
+        <form asp-action="Create">
+            <div class="form-group">
+
+                <label asp-for="Vehicle.Status" class="control-label"></label>
+                <input asp-for="Vehicle.Status" class="form-control" />
+                <span asp-validation-for="Vehicle.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Vehicle.Type" class="control-label"></label>
+                <input asp-for="Vehicle.Type" class="form-control" />
+                <span asp-validation-for="Vehicle.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Vehicle.LicensePlate" class="control-label"></label>
+                <input asp-for="Vehicle.LicensePlate" class="form-control" />
+                <span asp-validation-for="Vehicle.LicensePlate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Vehicle.Model" class="control-label"></label>
+                <input asp-for="Vehicle.Model" class="form-control" />
+                <span asp-validation-for="Vehicle.Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Vehicle.Year" class="control-label"></label>
+                <input asp-for="Vehicle.Year" class="form-control" />
+                <span asp-validation-for="Vehicle.Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Vehicle.Price" class="control-label"></label>
+                <input asp-for="Vehicle.Price" class="form-control" />
+                <span asp-validation-for="Vehicle.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vehicle.Company" class="control-label"></label>
+                <select asp-for="Vehicle.Company" asp-items="@(new SelectList(Model.Companies, "Id", "Name"))" class="form-control"></select>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Vehicle.Sale" class="control-label"></label>
+                <input asp-for="Vehicle.Sale" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary my-2" />
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <a asp-action="Index" class="text-primary">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}
+

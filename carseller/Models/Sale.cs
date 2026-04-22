@@ -10,7 +10,9 @@ namespace carseller.Models
         public DateTime Date { get; set; }
         public SaleStatus Status { get; set; }
         public Client Client { get; set; }
+        public int ClientId { get; set; }
         public User User { get; set; }
+        public int UserId { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
 
         public Sale()
