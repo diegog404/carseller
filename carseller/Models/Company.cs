@@ -1,9 +1,12 @@
-﻿namespace carseller.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace carseller.Models
 {
     public class Company
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [Display(Name ="Phone Number")]
         public int PhoneNumber { get; set; }
         public string Address { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();

@@ -1,7 +1,9 @@
 ﻿using carseller.Models;
+using carseller.Models.ViewModels;
 using carseller.Services;
 using carseller.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace carseller.Controllers
@@ -124,6 +126,16 @@ namespace carseller.Controllers
             {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }

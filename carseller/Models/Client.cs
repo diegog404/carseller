@@ -1,11 +1,15 @@
-﻿namespace carseller.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace carseller.Models
 {
     public class Client
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [Display(Name = "Phone Number")]
         public int PhoneNumber { get; set; }
         public string State { get; set; }
+        [Display(Name ="Observation")]
         public string Obervation { get; set; }
         public ICollection<Sale> Sales { get; set; } = new List<Sale>();
 
