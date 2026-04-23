@@ -20,7 +20,6 @@ namespace carseller.Services
 
         public async Task InsertAsync(Vehicle obj)
         {
-            obj.Company = _context.Company.First();
             _context.Add(obj);
             await _context.SaveChangesAsync();
         }
