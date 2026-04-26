@@ -6,17 +6,27 @@ namespace carseller.Models
     public class Vehicle
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]
         public VehicleStatus Status { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]
         public VehicleType Type { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]
         [Display(Name ="License Plate")]
         public string LicensePlate { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]
         public string Model { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]
         public int Year { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:F2}")]
+        [Required(ErrorMessage = "{0} required")]
         public double Price { get; set; }
-        public Company Company { get; set; }
+
+        public Company? Company { get; set; }
         public int CompanyId { get; set; }
         public Sale? Sale { get; set; }
 

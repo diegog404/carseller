@@ -5,15 +5,21 @@ namespace carseller.Models
     public class User
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]
+        [EmailAddress(ErrorMessage ="Insira um email válido.")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string PasswordHash { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]
         [Display(Name ="Creation Date")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime CreationDate { get; set; }

@@ -5,10 +5,18 @@ namespace carseller.Models
     public class Client
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]
         [Display(Name = "Phone Number")]
         public int PhoneNumber { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]
         public string State { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]
         [Display(Name ="Observation")]
         public string Obervation { get; set; }
         public ICollection<Sale> Sales { get; set; } = new List<Sale>();

@@ -39,6 +39,15 @@ namespace carseller.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Sale sale)
         {
+            if (!ModelState.IsValid)
+            {
+                var clients = await _clientService.FindAllAsync();
+                var users = await _userService.FindAllAsync();
+
+                var viewModel = new SaleFormViewModel { Sale = sale, Clients = clients, Users = users };
+                return View(viewModel);
+            }
+
             await _saleService.InsertAsync(sale);
             return RedirectToAction(nameof(Index));
         }
@@ -107,6 +116,15 @@ namespace carseller.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Sale sale)
         {
+            if (!ModelState.IsValid)
+            {
+                var clients = await _clientService.FindAllAsync();
+                var users = await _userService.FindAllAsync();
+
+                var viewModel = new SaleFormViewModel { Sale = sale, Clients = clients, Users = users };
+                return View(viewModel);
+            }
+
             if (id != sale.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch." });

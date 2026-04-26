@@ -7,18 +7,23 @@ namespace carseller.Models
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]
         [DisplayFormat(DataFormatString ="{0:F2}")]
         public double Value { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public double Comission { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]
         [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
         public DateTime Date { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]
         public SaleStatus Status { get; set; }
-        public Client Client { get; set; }
+        public Client? Client { get; set; }
         public int ClientId { get; set; }
-        public User User { get; set; }
+        public User? User { get; set; }
         public int UserId { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
 
