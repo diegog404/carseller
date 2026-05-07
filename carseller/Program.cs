@@ -4,6 +4,7 @@ using carseller.Data;
 using carseller.Services;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -12,6 +13,8 @@ var connectionString = builder.Configuration.GetConnectionString("carsellerConte
 
 builder.Services.AddDbContext<carsellerContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<carsellerContext>().AddDefaultTokenProviders();
 
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ClientService>();
@@ -48,6 +51,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",
