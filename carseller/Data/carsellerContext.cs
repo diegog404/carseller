@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using carseller.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace carseller.Data
 {

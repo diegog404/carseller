@@ -4,8 +4,8 @@ namespace carseller.Models.ViewModels
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage ="Email address is required")]
-        [Display(Name ="Email address")]
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]

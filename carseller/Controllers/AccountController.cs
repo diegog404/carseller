@@ -1,14 +1,20 @@
-﻿using carseller.Models.ViewModels;
-using Microsoft.AspNetCore.Identity;
+﻿using carseller.Models;
+using carseller.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
+using carseller.Data;
+
 
 public class AccountController : Controller
 {
-    private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly carsellerContext _context;
 
-    public AccountController(SignInManager<IdentityUser> signInManager)
+
+    public AccountController(carsellerContext context)
     {
-        _signInManager = signInManager;
+        _context = context;
     }
 
     public IActionResult Login()
@@ -22,17 +28,47 @@ public class AccountController : Controller
         if (!ModelState.IsValid)
             return View(model);
 
-        var result = await _signInManager.PasswordSignInAsync(
-            model.Email,
-            model.Password,
-            false,
-            false
-        );
+        var user = _context.User.FirstOrDefault(u =>
+                u.Email == model.Email &&
+                u.PasswordHash == model.Password);
 
-        if (result.Succeeded)
-            return RedirectToAction("Index", "Home");
+        if (user == null)
+        {
+            ModelState.AddModelError("", "Email ou senha inválidos");
+            return View(model);
+        }
 
-        ModelState.AddModelError("", "Login inválido");
-        return View(model);
+        // Claims
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, user.Name),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim("UserId", user.Id.ToString())
+        };
+
+        // Identity
+        var claimsIdentity = new ClaimsIdentity(
+            claims,
+            CookieAuthenticationDefaults.AuthenticationScheme);
+
+        // Principal
+        var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+        // Login
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            claimsPrincipal);
+
+        return RedirectToAction("Index", "Home");
+}
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme);
+
+        return RedirectToAction("Login");
     }
 }
