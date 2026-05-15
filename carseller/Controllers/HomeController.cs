@@ -1,22 +1,35 @@
+using carseller.Data;
 using carseller.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using carseller.Models.Enums;
 using carseller.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace carseller.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly carsellerContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, carsellerContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var homeViewModel = new HomeViewModel
+            {
+                SalesInProgress = _context.Sale
+                .Include(s => s.Vehicles)
+                .Where(s => s.Status == SaleStatus.Pending)
+                .ToList()
+            };
+
+            return View(homeViewModel);
         }
 
         public IActionResult Privacy()
