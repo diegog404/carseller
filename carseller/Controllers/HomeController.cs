@@ -21,13 +21,43 @@ namespace carseller.Controllers
 
         public IActionResult Index()
         {
+            var currentMonth = DateTime.Now.Month;
+            var currentYear = DateTime.Now.Year;
+
+
             var homeViewModel = new HomeViewModel
             {
                 SalesInProgress = _context.Sale
                 .Include(s => s.Vehicles)
                 .Where(s => s.Status == SaleStatus.Pending)
-                .ToList()
+                .ToList(),
+
+                BilledSales = _context.Sale
+                .Include(s => s.Vehicles)
+                .OrderByDescending(s => s.Date)
+                .Take(5)
+                .Where(s => s.Status == SaleStatus.Billed && s.Date.Month == currentMonth)
+                .ToList(),
+
+                MonthlyComission = _context.Sale
+                .Where(s =>
+                    s.Status == SaleStatus.Billed &&
+                    s.Date.Month == currentMonth &&
+                    s.Date.Year == currentYear)
+                .Sum(s => (double?)s.Comission) ?? 0,
+
+                ExpectedComission = _context.Sale
+                .Where(s => 
+                s.Status == SaleStatus.Pending && 
+                s.Date.Month == currentMonth &&
+                    s.Date.Year == currentYear)
+                .Sum(s => (double?)s.Comission) ?? 0,
+
+
+
             };
+
+
 
             return View(homeViewModel);
         }

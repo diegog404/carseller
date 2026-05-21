@@ -8,11 +8,11 @@ namespace carseller.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "{0} required")]
-        [DisplayFormat(DataFormatString ="{0:F2}")]
+        [DisplayFormat(DataFormatString ="{0:F3}")]
         public double Value { get; set; }
 
         [Required(ErrorMessage = "{0} required")]
-        [DisplayFormat(DataFormatString = "{0:F2}")]
+        [DisplayFormat(DataFormatString = "{0:F3}")]
         public double Comission { get; set; }
 
         [Required(ErrorMessage = "{0} required")]
