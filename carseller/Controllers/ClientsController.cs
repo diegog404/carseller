@@ -22,9 +22,16 @@ namespace carseller.Controllers
         }
 
         // GET: Clients
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchState)
         {
-            return View(await _context.Client.ToListAsync());
+            var clients = await _context.Client.ToListAsync();
+
+            if (!string.IsNullOrEmpty(searchState))
+            {
+                clients = clients.Where(x => x.State.Contains(searchState)).ToList();
+            }
+
+            return View(clients);
         }
 
         // GET: Clients/Details/5

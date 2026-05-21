@@ -12,6 +12,64 @@
     <a asp-action="Create" class="btn btn-primary">Create new</a>
 </p>
 
+<form method="get">
+
+    <div class="row mb-3">
+
+        <div class="col-md-4">
+            <input type="text"
+                   name="searchModel"
+                   value="@Context.Request.Query["searchModel"]"
+                   class="form-control"
+                   placeholder="Search by Model" />
+        </div>
+
+        <div class="col-md-4">
+            <input type="text"
+                   name="searchYear"
+                   value="@Context.Request.Query["searchYear"]"
+                   class="form-control"
+                   placeholder="Search by Year" />
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit"
+                    class="btn btn-primary">
+                Filter
+            </button>
+        </div>
+    </div>
+</form>
+
+<form method="get">
+
+    <div class="row mb-3">
+
+        <div class="col-md-4">
+            <input type="text"
+                   name="searchStatus"
+                   value="@Context.Request.Query["searchStatus"]"
+                   class="form-control"
+                   placeholder="Search by Status" />
+        </div>
+
+        <div class="col-md-4">
+            <input type="text"
+                   name="searchType"
+                   value="@Context.Request.Query["searchType"]"
+                   class="form-control"
+                   placeholder="Search by Type" />
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit"
+                    class="btn btn-primary">
+                Filter
+            </button>
+        </div>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr class="table-primary">

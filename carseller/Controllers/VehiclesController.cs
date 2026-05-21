@@ -1,5 +1,6 @@
 ﻿using carseller.Models;
 using carseller.Models.ViewModels;
+using carseller.Models.Enums;
 using carseller.Services;
 using carseller.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
@@ -19,10 +20,32 @@ namespace carseller.Controllers
             _companyService = companyService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchModel, string searchYear, string searchStatus, string searchType)
         {
-            var list = await _vehicleService.FindAllAsync();
-            return View(list);
+            
+            var vehicles = await _vehicleService.FindAllAsync();
+
+            if (!string.IsNullOrEmpty(searchModel))
+            {
+                vehicles = vehicles.Where(x => x.Model.Contains(searchModel)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(searchYear))
+            {
+                vehicles = vehicles.Where(x => x.Year.ToString().Contains(searchYear)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(searchStatus))
+            {
+                vehicles = vehicles.Where(x => x.Status.ToString().Contains(searchStatus)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(searchType))
+            {
+                vehicles = vehicles.Where(x => x.Type.ToString().Contains(searchType)).ToList();
+            }
+
+            return View(vehicles);
         }
 
         public async Task<IActionResult> Create()

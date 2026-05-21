@@ -1,4 +1,5 @@
 ﻿using carseller.Models;
+using carseller.Models.Enums;
 using carseller.Models.ViewModels;
 using carseller.Services;
 using carseller.Services.Exceptions;
@@ -21,10 +22,16 @@ namespace carseller.Controllers
             _userService = userService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchStatus)
         {
-            var list = await _saleService.FindAllAsync();
-            return View(list);
+            var sales = await _saleService.FindAllAsync();
+
+            if (!string.IsNullOrEmpty(searchStatus))
+            {
+                sales = sales.Where(x => x.Status.ToString().Contains(searchStatus)).ToList();
+            }
+
+            return View(sales);
         }
 
         public async Task<IActionResult> Create()

@@ -17,10 +17,16 @@ namespace carseller.Controllers
             _companyService = companyService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchName)
         {
-            var list = await _companyService.FindAllAsync();
-            return View(list);
+            var companies = await _companyService.FindAllAsync();
+
+            if (!string.IsNullOrEmpty(searchName))
+            {
+                companies = companies.Where(x => x.Name.Contains(searchName)).ToList();
+            }
+
+            return View(companies);
         }
 
         public async Task<IActionResult> Create()
