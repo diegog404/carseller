@@ -5,6 +5,11 @@
 *@
 @{
 }
+
+@{
+    ViewData["Title"] = "Company Details";
+}
+
 <h2>Company</h2>
 
 <div>
@@ -31,7 +36,7 @@
     </dl>
 
     <div>
-        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-dark">Edit</a> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-dark">Edit</a>
+        <a asp-action="Index">Back to list</a>
     </div>
 </div>

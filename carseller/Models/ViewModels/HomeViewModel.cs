@@ -6,13 +6,11 @@
 
         public ICollection<Sale> BilledSales { get; set; }
 
+        public ICollection<Vehicle> NegociatedVehicles { get; set; }
+
         public double MonthlyComission { get; set; }
 
         public double ExpectedComission { get; set; }
-
-        public double MonthlyNewClients { get; set;  }
-
-        public double MonthlyNewCompanies { get; set; }
     }
 
 }

@@ -24,7 +24,7 @@ namespace carseller.Models
         public int Year { get; set; }
 
         [Required(ErrorMessage = "{0} required")]
-        [DisplayFormat(DataFormatString = "{0:F2}")]
+        [DisplayFormat(DataFormatString = "{0:F3}")]
         public double Price { get; set; }
 
         public Company? Company { get; set; }

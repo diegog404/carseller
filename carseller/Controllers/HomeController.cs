@@ -39,6 +39,8 @@ namespace carseller.Controllers
                 .Where(s => s.Status == SaleStatus.Billed && s.Date.Month == currentMonth)
                 .ToList(),
 
+                NegociatedVehicles = _context.Vehicle.Where(s => s.Status == VehicleStatus.Unavailable).ToList(),
+
                 MonthlyComission = _context.Sale
                 .Where(s =>
                     s.Status == SaleStatus.Billed &&
