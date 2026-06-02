@@ -16,7 +16,7 @@ namespace carseller.Models
         public double Comission { get; set; }
 
         [Required(ErrorMessage = "{0} required")]
-        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
+        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy hh:MM}")]
         public DateTime Date { get; set; }
 
         [Required(ErrorMessage = "{0} required")]

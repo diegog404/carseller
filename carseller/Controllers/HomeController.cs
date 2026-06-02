@@ -50,17 +50,9 @@ namespace carseller.Controllers
 
                 ExpectedComission = _context.Sale
                 .Where(s => 
-                s.Status == SaleStatus.Pending && 
-                s.Date.Month == currentMonth &&
-                    s.Date.Year == currentYear)
+                s.Status == SaleStatus.Pending)
                 .Sum(s => (double?)s.Comission) ?? 0,
-
-
-
             };
-
-
-
             return View(homeViewModel);
         }
 

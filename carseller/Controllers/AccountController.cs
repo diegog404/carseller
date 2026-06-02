@@ -57,7 +57,7 @@ public class AccountController : Controller
         // Login
         await HttpContext.SignInAsync(
             CookieAuthenticationDefaults.AuthenticationScheme,
-            claimsPrincipal);
+            claimsPrincipal, new AuthenticationProperties { IsPersistent = false });
 
         return RedirectToAction("Index", "Home");
 }
